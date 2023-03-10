@@ -5,7 +5,7 @@
         "Priority": 9000,
         "FixedRate": 0.1,
         "ReservoirSize": 5,
-        "ServiceName": "back-end-flask",
+        "ServiceName": "baend-flask",
         "ServiceType": "*",
         "Host": "*",
         "HTTPMethod": "*",
