@@ -1,4 +1,6 @@
 from datetime import datetime, timedelta, timezone
+from lib.db import pool
+
 class HomeActivities:
   def run():
     now = datetime.now(timezone.utc).astimezone()
