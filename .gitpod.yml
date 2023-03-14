@@ -9,9 +9,10 @@ tasks:
       sudo ./aws/install
       cd $THEIA_WORKSPACE_ROOT
   - name: npm
-      cd frontend-react-js
-      npm npm install 
-      cd ..
+      command |
+        cd frontend-react-js
+        npm install 
+        cd ..
 vscode:
   extensions:
     - 42Crunch.vscode-openapi
