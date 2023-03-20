@@ -9,8 +9,8 @@ services:
       AWS_ACCESS_KEY_ID: "${AWS_ACCESS_KEY_ID}"
       AWS_SECRET_ACCESS_KEY: "${AWS_SECRET_ACCESS_KEY}"
       
-      REACT_APP_AWS_USER_POOLS_ID: "us-east-1_AwDRdA2ZI"
-      REACT_APP_CLIENT_ID: "7acl4f9rt3s0iht2pli2rjroh" 
+      AWS_COGNITO_USER_POOL_ID: "us-east-1_AwDRdA2ZI"
+      AWS_COGNITO_USER_POOL_CLIENT_ID: "7acl4f9rt3s0iht2pli2rjroh"  
     build: ./backend-flask
     ports:
       - "4567:4567"
