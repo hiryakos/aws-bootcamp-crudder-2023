@@ -1,7 +1,9 @@
 from flask import Flask
+from flask import got_request_exception
 from flask import request
 from flask_cors import CORS, cross_origin
 import os
+import sys
 
 from services.home_activities import *
 from services.notifications_activities import *
@@ -14,15 +16,32 @@ from services.messages import *
 from services.create_message import *
 from services.show_activity import *
 
+#from lib.cognito_jwt_token import CognitoJwtToken, extract_access_token, TokenVerifyError
+
 app = Flask(__name__)
+
+# cognito_jwt_token = CognitoJwtToken(
+#   user_pool_id=os.getenv("AWS_COGNITO_USER_POOL_ID"), 
+#   user_pool_client_id=os.getenv("AWS_COGNITO_USER_POOL_CLIENT_ID"),
+#   region=os.getenv("AWS_DEFAULT_REGION")
+# )
+
 frontend = os.getenv('FRONTEND_URL')
 backend = os.getenv('BACKEND_URL')
 origins = [frontend, backend]
+# cors = CORS(
+#   app, 
+#   resources={r"/api/*": {"origins": origins}},
+#   expose_headers="location,link",
+#   allow_headers="content-type,if-modified-since",
+#   methods="OPTIONS,GET,HEAD,POST"
+# )
+
 cors = CORS(
   app, 
   resources={r"/api/*": {"origins": origins}},
-  expose_headers="location,link",
-  allow_headers="content-type,if-modified-since",
+  headers=['Content-Type', 'Authorization'], 
+  expose_headers='Authorization',
   methods="OPTIONS,GET,HEAD,POST"
 )
 
@@ -63,6 +82,13 @@ def data_create_message():
 
 @app.route("/api/activities/home", methods=['GET'])
 def data_home():
+  app.logger.debug("AUTH HEADER")
+  app.logger.info('Authorization')
+  app.logger.debug(
+  request.headers.get('Authorization') 
+   
+  )
+ 
   data = HomeActivities.run()
   return data, 200
 
