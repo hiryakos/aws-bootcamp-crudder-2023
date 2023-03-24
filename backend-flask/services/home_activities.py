@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta, timezone
 
-from lib.db import pool, query_wrap_array
+from lib.db import db
 
 class HomeActivities:
   def run(cognito_user_id=None):
