@@ -30,7 +30,6 @@ cognito_jwt_token = CognitoJwtToken(
 frontend = os.getenv('FRONTEND_URL')
 backend = os.getenv('BACKEND_URL')
 origins = [frontend, backend]
-
 cors = CORS(
   app, 
   resources={r"/api/*": {"origins": origins}},
