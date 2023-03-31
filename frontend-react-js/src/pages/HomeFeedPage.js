@@ -35,9 +35,9 @@ export default function HomeFeedPage() {
       console.log(err);
     }
   };
-  
- 
 
+
+  
   React.useEffect(()=>{
     //prevents double call
     if (dataFetchedRef.current) return;
@@ -46,7 +46,7 @@ export default function HomeFeedPage() {
     loadData();
     checkAuth(setUser);
   }, [])
-  
+
   return (
     <article>
       <DesktopNavigation user={user} active={'home'} setPopped={setPopped} />
