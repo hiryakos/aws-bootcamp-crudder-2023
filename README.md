@@ -36,6 +36,18 @@ aws ecs create-cluster \
 --cluster-name cruddur \
 --service-connect-defaults namespace=cruddur
 ```
+## Create ECR  repo and puch images 
+### Loging to ECR
+```sh
+aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com"
+```
+### Base Image for Python
+```sh
+aws ecr create-repository \
+  --repository-name cruddur-python \
+  --image-tag-mutability MUTABLE
+```
+
 
 ```sh
 aws ecs create-service --cli-input-json file://aws/json/service-backend-flask.json
