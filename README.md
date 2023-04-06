@@ -1,3 +1,42 @@
+# Add the file to check health for flask app.py
+```sh
+@app.route('/api/health-check')
+def health_check():
+  return {'success': True}, 200
+```
+# Bashscript for healthcheck
+```sh
+#!/usr/bin/env python3
+
+import urllib.request
+
+try:
+  response = urllib.request.urlopen('http://localhost:4567/api/health-check')
+  if response.getcode() == 200:
+    print("[OK] Flask server is running")
+    exit(0) # success
+  else:
+    print("[BAD] Flask server is not running")
+    exit(1) # false
+# This for some reason is not capturing the error....
+#except ConnectionRefusedError as e:
+# so we'll just catch on all even though this is a bad practice
+except Exception as e:
+  print(e)
+  exit(1) # false
+```
+# Create Cloudwatch log
+```sh
+aws logs create-log-group --log-group-name cruddur
+aws logs put-retention-policy --log-group-name cruddur --retention-in-days 1
+```
+# Create ECS Cluster
+```sh
+aws ecs create-cluster \
+--cluster-name cruddur \
+--service-connect-defaults namespace=cruddur
+```
+
 ```sh
 aws ecs create-service --cli-input-json file://aws/json/service-backend-flask.json
 ```
