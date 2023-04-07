@@ -27,9 +27,11 @@ from lib.cognito_jwt_token import CognitoJwtToken, extract_access_token, TokenVe
 # from opentelemetry.sdk.trace.export import BatchSpanProcessor
 # from opentelemetry.sdk.trace.export import ConsoleSpanExporter, SimpleSpanProcessor
 
-# # X-RAY ----------
-# from aws_xray_sdk.core import xray_recorder
-# from aws_xray_sdk.ext.flask.middleware import XRayMiddleware
+# X-RAY ----------
+from aws_xray_sdk.core import xray_recorder
+from aws_xray_sdk.ext.flask.middleware import XRayMiddleware
+xray_url = osgetenv("AWS_XRAY_URL")
+xray_recorder.configure(service='backend-flask', dynamic_naming=xray_url)
 
 # # CloudWatch Logs ----
 # import watchtower
@@ -57,9 +59,7 @@ from flask import got_request_exception
 # processor = BatchSpanProcessor(OTLPSpanExporter())
 # provider.add_span_processor(processor)
 
-# X-RAY ----------
-#xray_url = osgetenv("AWS_XRAY_URL")
-#xray_recorder.configure(service='backend-flask', dynamic_naming=xray_url)
+
 
 # OTEL ----------
 # Show this in the logs within the backend-flask app (STDOUT)
@@ -78,7 +78,7 @@ cognito_jwt_token = CognitoJwtToken(
 )
 
 # X-RAY ----------
-#XRayMiddleware(app, xray_recorder)
+XRayMiddleware(app, xray_recorder)
 
 # HoneyComb ---------
 # Initialize automatic instrumentation with Flask

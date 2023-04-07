@@ -1,4 +1,4 @@
-FROM 527923760918.dkr.ecr.us-east-1.amazonaws.com/cruddur-python:3.10-slim-buster
+FROM python:3.10-slim-buster
 
 # Inside Container
 # make a new folder inside container
@@ -26,4 +26,4 @@ EXPOSE ${PORT}
 
 # CMD (Command)
 # python3 -m flask run --host=0.0.0.0 --port=4567
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=4567"] 
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=4567"]
