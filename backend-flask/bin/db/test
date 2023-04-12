@@ -15,3 +15,4 @@ except psycopg.Error as e:
   print("Unable to connect to the database:", e)
 finally:
   conn.close()
+  
