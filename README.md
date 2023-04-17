@@ -112,3 +112,8 @@ If you want to run and test it
 docker run --rm -p 3000:3000 -it frontend-react-js 
 ```
 
+### Login to ECR
+```sh
+aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com"
+```
+
