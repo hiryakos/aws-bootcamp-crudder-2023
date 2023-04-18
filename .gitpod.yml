@@ -30,16 +30,16 @@ tasks:
     command: |
       export GITPOD_IP=$(curl ifconfig.me)
       source  "$THEIA_WORKSPACE_ROOT/backend-flask/bin/rds-update-sg-rule"
-  - name: frontend-npm
-    init: |
-      cd frontend-react-js
-      npm i
-      cd ..
-  - name: backend-flask
+  - name: flask
     command: |
+      ruby  "$THEIA_WORKSPACE_ROOT/bin/backend/generate-env"
       cd backend-flask
       pip install -r requirements.txt
-      cd ..      
+  - name: react-js
+    command: |
+      ruby  "$THEIA_WORKSPACE_ROOT/bin/frontend/generate-env"
+      cd frontend-react-js
+      npm i   
 vscode:
   extensions:
     - 42Crunch.vscode-openapi
